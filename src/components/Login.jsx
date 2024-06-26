@@ -46,7 +46,12 @@ function Login() {
                 {error && <p className='text-red-600 mt-8 text-center'> {error} </p>}
                 <form onSubmit={handleSubmit(login)} className='mt-8'>
                     <div className='space-y-5 text-left'>
-                        <Input label='Email: ' placeholder='Enter Your Email' labelClass='text-black'  type='email' 
+                        <Input 
+                        label='Email: '
+                        placeholder='Enter Your Email'
+                        labelClass='text-black' 
+                        type='email' 
+                        autoComplete='off'
                         {...register('email', {
                             required: true,
                             validate: {
@@ -54,7 +59,12 @@ function Login() {
                             }
                         })} />
 
-                        <Input label='Password: ' placeholder='Enter Your Password' labelClass='text-black' type='password' 
+                        <Input 
+                        label='Password: '
+                        placeholder='Enter Your Password' 
+                        labelClass='text-black' 
+                        type='password' 
+                        autoComplete='off'
                         {...register('password', {
                             required: true
                         })} />

@@ -57,6 +57,7 @@ function SignUp() {
                             label="Full Name: "
                             placeholder="Enter your full name"
                             labelClass='text-black'
+                            autoComplete='off'
                             {...register("name", {
                                 required: true,
                             })}
@@ -66,6 +67,7 @@ function SignUp() {
                             placeholder="Enter your email"
                             labelClass='text-black'
                             type="email"
+                            autoComplete='off'
                             {...register("email", {
                                 required: true,
                                 validate: {

@@ -17,7 +17,7 @@ const Input = React.forwardRef(function Input({
             {label && <label className={`inline-block mb-1 pl-1 ${labelClass}`} htmlFor={id}>
                 {label}
             </label>}
-            <div className='flex '>
+            <div className='flex items-center'>
                 <input type={type} className={`px-3 py-2 bg-white text-black outline-none focus:border-black duration-300 relative border-2 w-full ${className}`} id={id} ref={ref} {...props} />
                 {
                     type === 'password' &&

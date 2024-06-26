@@ -31,6 +31,7 @@ export class Service {
             )
         } catch (error) {
             console.log("Appwrite Service :: createPost :: error :: ", error)
+            // throw error
         }
     }
 
@@ -97,15 +98,15 @@ export class Service {
 
     async uploadFile(file) {
         try {
-            // console.log(file[0]);
+            // console.log(file);
             return await this.storage.createFile(
                 conf.appWriteStorageId,
                 ID.unique(),
                 file
             )
         } catch (error) {
-            console.log("Appwrite Service :: uploadImage :: error :: ", error)
-            return false
+            // console.log("Appwrite Service :: uploadFile :: error :: ", error)
+            throw error
         }
     }
 

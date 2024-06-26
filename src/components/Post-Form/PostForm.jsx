@@ -22,7 +22,9 @@ function PostForm({ post }) {
     const userData = useSelector((state) => state.auth.userData)
 
     const submit = async (data) => {
+
         if (post) {
+
             const file = data.image[0] ? await appwriteService.uploadFile(data.image[0]) : null
 
             if (file) {
@@ -36,10 +38,12 @@ function PostForm({ post }) {
             if (updatePost) {
                 navigate(`/post/${updatePost.$id}`)
             }
+
         } else {
 
-            const file = await appwriteService.uploadFile(data.image[0])
 
+
+            const file = await appwriteService.uploadFile(data.image[0])
             if (file) {
                 const fileId = file.$id
                 data.featured_Image = fileId
@@ -122,8 +126,9 @@ function PostForm({ post }) {
                     label='Featured Image :'
                     type='file'
                     className='mb-4'
-                    accept="image/png, image/jpg, image/jpeg, image/gif"
+                    accept="image/png, image/jpg, image/jpeg, image/gif image/svg+xml, image/webp"
                     {...register("image", { required: !post })}
+
                     onChange={onImageChange}
                 />
                 {post ? (
@@ -134,7 +139,7 @@ function PostForm({ post }) {
                             className="rounded-lg"
                         />
                     </div>
-                ) : <div className="w-full" id='js-product-image'>
+                ) : image && <div className="w-full mb-4">
                     <img
                         src={image}
                         alt='Uploaded Image'
