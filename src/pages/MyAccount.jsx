@@ -4,7 +4,6 @@ import { Container, PostCard } from '../components'
 import authService from '../appwrite/auth'
 import { useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
-import { act } from 'react'
 
 function MyAccount() {
 
@@ -28,7 +27,7 @@ function MyAccount() {
 
             if (posts) {
               const result = []
-              posts.documents.map(post => {
+              posts?.documents.map(post => {
 
                 if (post.user_Id === userData?.$id) {
                   result.push(post)
@@ -36,7 +35,6 @@ function MyAccount() {
                     setIsUserPost(true)
                   }
                 }
-                
               })
               setPosts(result)
             }
@@ -61,8 +59,6 @@ function MyAccount() {
   for (let m = 3; m < posts.length; m += 4) {
     rows4.push(posts[m])
   }
-
-
 
   return (
     <div>

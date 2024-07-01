@@ -8,11 +8,15 @@ function AllPosts() {
     const [posts, setPosts] = useState([])
 
 
-    appwriteService.getPosts([]).then((posts) => {
-        if (posts) {
-            setPosts(posts.documents)
-        }
-    })
+    useEffect(() => {
+        appwriteService.getPosts([]).then((posts) => {
+            if (posts) {
+                setPosts(posts?.documents)
+            }
+        })
+    }, [])
+    
+    
     const userData = useSelector((state) => state.auth.userData)
 
     let rows1 = []

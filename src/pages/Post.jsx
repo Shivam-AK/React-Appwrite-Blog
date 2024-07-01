@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import appwriteService from "../appwrite/service"
 import { Button, Container } from "../components"
-import parse from "html-react-parser"
 import { useSelector } from "react-redux"
+import Editor from "../components/EditorContext"
 
 export default function Post() {
     const [post, setPost] = useState(null)
@@ -11,14 +11,16 @@ export default function Post() {
     const navigate = useNavigate()
 
     const userData = useSelector((state) => state.auth.userData)
-
     const isAuthor = post && userData ? post.user_Id === userData.$id : false
 
     useEffect(() => {
         if (slug) {
             appwriteService.getPost(slug).then((post) => {
-                if (post) setPost(post)
-                else navigate("/")
+                if (post) {
+                    setPost(post)
+                } else {
+                    navigate("/")
+                }
             })
         } else navigate("/")
     }, [slug, navigate])
@@ -37,11 +39,10 @@ export default function Post() {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post.featured_Image)}
+                        src={appwriteService.getFilePreview(post?.featured_Image)}
                         alt={post.title}
                         className="rounded-xl"
                     />
-
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
@@ -59,7 +60,14 @@ export default function Post() {
                     <h1 className="text-2xl font-bold">{post.title}</h1>
                 </div>
                 <div className="browser-css">
-                    {parse(post.content)}
+                    <style>
+                        {`.codex-editor .codex-editor__redactor {
+                            padding-bottom: 50px !important;
+                        }
+                        `}
+                    </style>
+                    <Editor data={{ "blocks": JSON.parse(post?.content) }} readOnly={true} reamingCharacter={false} className="bg-teal-50 text-black font-normal" />
+                    {/* {console.log(JSON.parse(post?.content))} */}
                 </div>
             </Container>
         </div>

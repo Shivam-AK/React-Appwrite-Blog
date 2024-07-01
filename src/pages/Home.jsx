@@ -4,7 +4,6 @@ import { Container, PostCard } from '../components'
 import authService from '../appwrite/auth'
 import { useSelector } from "react-redux"
 
-
 function Home() {
 
     const [posts, setPosts] = useState([])
@@ -21,12 +20,11 @@ function Home() {
                 appwriteService.getPosts()
                     .then((posts) => {
                         if (posts) {
-                            setPosts(posts.documents)
+                            setPosts(posts?.documents)
                             // console.log(posts, posts.documents);
                         }
                     })
             }
-
         })
     }, [])
 
@@ -64,42 +62,42 @@ function Home() {
                                     </div>
                         ))} */}
                         <div className='w-1/4'>
-                        {rows1.map(post => (
-                            <div key={post?.$id} className='p-2 '>
-                                <PostCard
-                                    borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
-                                    {...post}
-                                />
-                            </div>
-                        ))}
-                    </div >
-                    <div className='w-1/4'>
-                        {rows2.map(post => (
-                            <div key={post?.$id} className='p-2 '>
-                                <PostCard
-                                    borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
-                                    {...post} />
-                            </div>
-                        ))}
-                    </div>
-                    <div className='w-1/4'>
-                        {rows3.map(post => (
-                            <div key={post?.$id} className='p-2 '>
-                                <PostCard
-                                    borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
-                                    {...post} />
-                            </div>
-                        ))}
-                    </div>
-                    <div className='w-1/4'>
-                        {rows4.map(post => (
-                            <div key={post?.$id} className='p-2 '>
-                                <PostCard
-                                    borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
-                                    {...post} />
-                            </div>
-                        ))}
-                    </div>
+                            {rows1.map(post => (
+                                <div key={post?.$id} className='p-2 '>
+                                    <PostCard
+                                        borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
+                                        {...post}
+                                    />
+                                </div>
+                            ))}
+                        </div >
+                        <div className='w-1/4'>
+                            {rows2.map(post => (
+                                <div key={post?.$id} className='p-2 '>
+                                    <PostCard
+                                        borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
+                                        {...post} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className='w-1/4'>
+                            {rows3.map(post => (
+                                <div key={post?.$id} className='p-2 '>
+                                    <PostCard
+                                        borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
+                                        {...post} />
+                                </div>
+                            ))}
+                        </div>
+                        <div className='w-1/4'>
+                            {rows4.map(post => (
+                                <div key={post?.$id} className='p-2 '>
+                                    <PostCard
+                                        borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
+                                        {...post} />
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </Container>
             </div>
@@ -119,7 +117,6 @@ function Home() {
             </div>
         )
     }
-
 }
 
 export default Home
