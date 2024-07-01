@@ -3,7 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import appwriteService from "../appwrite/service"
 import { Button, Container } from "../components"
 import { useSelector } from "react-redux"
-import Editor from "../components/EditorContext"
+import Editor from "../components/EditorJS"
 
 export default function Post() {
     const [post, setPost] = useState(null)

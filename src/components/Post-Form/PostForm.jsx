@@ -1,11 +1,12 @@
 import React, { useCallback, useState, useRef, useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Input, Select } from '../index'
+import authService from '../../appwrite/auth'
 // import { RTE } from '../index'
 import appwriteService from '../../appwrite/service'
 import { useNavigate } from 'react-router-dom'
 import { useSelector } from 'react-redux'
-import Editor from "../EditorContext"
+import Editor from "../EditorJS"
 
 function PostForm({ post }) {
     // console.log(post);
@@ -51,8 +52,8 @@ function PostForm({ post }) {
 
     const submit = async (data) => {
         setError('')
-        console.log(data)
-        console.log(editorData)
+        // console.log(data)
+        // console.log(editorData)
 
         if (post) {
             // console.log(data);
@@ -138,7 +139,32 @@ function PostForm({ post }) {
         return ''
     }, [])
 
+    const [addNewPost, setAddNewPost] = useState(false)
     useEffect(() => {
+
+        authService.getCurrentUser().then(user => {
+            if (user) {
+                // console.log(user?.labels[0])
+
+                if (user?.labels[0] === 'admin') {
+                    setAddNewPost(true)
+                } else {
+                    appwriteService.getPosts()
+                        .then(posts => {
+                            let totalPost = 0
+                            posts?.documents.map(post => {
+                                if (post.user_Id === user?.$id) {
+                                    totalPost++
+                                }
+                            })
+                            if (5 >= totalPost) {
+                                setAddNewPost(true)
+                            }
+                        })
+                }
+            }
+        })
+
         const subscription = watch((value, { name }) => {
             // console.log(value);
             if (name === 'title') {
@@ -160,7 +186,7 @@ function PostForm({ post }) {
     return (
         <>
             {error && <p className='text-red-600 bg-white max-w-fit m-auto py-1 px-3 rounded-lg'> {error} </p>}
-            <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
+            {addNewPost ? <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
                 <div className='w-2/3 px-2 text-left'>
                     <Input
                         label="Title :"
@@ -242,7 +268,7 @@ function PostForm({ post }) {
                         {post ? "Update" : "Submit"}
                     </Button>
                 </div>
-            </form>
+            </form> : <h2>Your post creation limit has been Exceeded</h2>}
         </>
     )
 }
