@@ -22,7 +22,7 @@ function MyAccount() {
     authService.getCurrentUser().then(user => {
       if (user) {
 
-        appwriteService.getPosts()
+        appwriteService.getPosts([])
           .then(posts => {
 
             if (posts) {

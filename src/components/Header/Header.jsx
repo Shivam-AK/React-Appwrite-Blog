@@ -63,8 +63,8 @@ function Header() {
             {
               authStatus.status && (
                 <li key='logout' className='group/item relative'>
-                  <button onClick={() => navigate('/my-account')} className='inline-block px-5 py-2 duration-200 hover:bg-blue-300 rounded-tl-3xl rounded-tr-3xl border-white'>Hi, {userName}</button>
-                  <ul className='group/edit w-full hidden group-hover/item:block absolute '>
+                  <button onClick={() => navigate('/my-account')} className='group-hover/item:bg-blue-300 inline-block px-5 py-2 duration-200 hover:bg-blue-300 rounded-tl-3xl rounded-tr-3xl border-white'>Hi, {userName}</button>
+                  <ul className='group/edit group/btn w-full hidden group-hover/item:block absolute '>
                     <li><LogoutBtn /></li>
                   </ul>
                 </li>

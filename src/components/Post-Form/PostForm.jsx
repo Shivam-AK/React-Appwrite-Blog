@@ -157,7 +157,7 @@ function PostForm({ post }) {
                                     totalPost++
                                 }
                             })
-                            if (5 >= totalPost) {
+                            if (5 > totalPost) {
                                 setAddNewPost(true)
                             }
                         })

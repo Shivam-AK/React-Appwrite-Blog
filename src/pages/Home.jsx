@@ -9,23 +9,25 @@ function Home() {
     const [posts, setPosts] = useState([])
     const [activeUser, setActiveUser] = useState(false)
 
-    const userData = useSelector((state) => state.auth.userData)
+    const userData = useSelector((state) => state?.auth?.userData)
 
     useEffect(() => {
+        if (userData) {
 
-        authService.getCurrentUser().then(user => {
-            if (user) {
-                setActiveUser(true)
+            authService.getCurrentUser().then(user => {
+                if (user) {
+                    setActiveUser(true)
 
-                appwriteService.getPosts()
-                    .then((posts) => {
-                        if (posts) {
-                            setPosts(posts?.documents)
-                            // console.log(posts, posts.documents);
-                        }
-                    })
-            }
-        })
+                    appwriteService.getPosts()
+                        .then((posts) => {
+                            if (posts) {
+                                setPosts(posts?.documents)
+                                // console.log(posts, posts.documents);
+                            }
+                        })
+                }
+            })
+        }
     }, [])
 
     let rows1 = []
@@ -75,7 +77,7 @@ function Home() {
                             {rows2.map(post => (
                                 <div key={post?.$id} className='p-2 '>
                                     <PostCard
-                                        borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
+                                        borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
                                         {...post} />
                                 </div>
                             ))}
@@ -84,7 +86,7 @@ function Home() {
                             {rows3.map(post => (
                                 <div key={post?.$id} className='p-2 '>
                                     <PostCard
-                                        borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
+                                        borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
                                         {...post} />
                                 </div>
                             ))}
@@ -93,7 +95,7 @@ function Home() {
                             {rows4.map(post => (
                                 <div key={post?.$id} className='p-2 '>
                                     <PostCard
-                                        borderColor={post?.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
+                                        borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
                                         {...post} />
                                 </div>
                             ))}
