@@ -4,6 +4,7 @@ import appwriteService from "../appwrite/service"
 import { Button, Container } from "../components"
 import { useSelector } from "react-redux"
 import Editor from "../components/EditorJS"
+import defaultImg from '../assets/defaultImg.jpg'
 
 export default function Post() {
     const [post, setPost] = useState(null)
@@ -39,7 +40,7 @@ export default function Post() {
             <Container>
                 <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
                     <img
-                        src={appwriteService.getFilePreview(post?.featured_Image)}
+                        src={userData !== null ? appwriteService.getFilePreview(post?.featured_Image) : defaultImg}
                         alt={post.title}
                         className="rounded-xl"
                     />

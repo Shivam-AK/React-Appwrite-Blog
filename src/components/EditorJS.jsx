@@ -23,7 +23,7 @@ import Undo from 'editorjs-undo'
 const Editor = React.forwardRef(function Editor({ data, onChangeData, readOnly, placeholder, reamingCharacter, ...props }, ref) {
     const reference = useRef()
     const totalChar = 10000
-    const [reamingChar, setReamingChar] = useState(0)
+    const [reamingChar, setReamingChar] = useState(10000)
     const EDITOR_JS_TOOLS = {
         textAlignment: {
             class: AlignmentBlockTune,
@@ -109,7 +109,7 @@ const Editor = React.forwardRef(function Editor({ data, onChangeData, readOnly, 
                     new Undo({ editor })
                     new DragDrop(editor)
                 },
-                async onChange(api, event) {
+                async onChange(api) {
                     if (!readOnly) {
 
                         const data = await api.saver.save()

@@ -12,11 +12,11 @@ function Home() {
     const userData = useSelector((state) => state?.auth?.userData)
 
     useEffect(() => {
-        if (userData) {
+        // if (userData) {
 
-            authService.getCurrentUser().then(user => {
-                if (user) {
-                    setActiveUser(true)
+        //     authService.getCurrentUser().then(user => {
+        //         if (user) {
+        //             setActiveUser(true)
 
                     appwriteService.getPosts()
                         .then((posts) => {
@@ -25,9 +25,9 @@ function Home() {
                                 // console.log(posts, posts.documents);
                             }
                         })
-                }
-            })
-        }
+        //         }
+        //     })
+        // }
     }, [])
 
     let rows1 = []
@@ -50,7 +50,7 @@ function Home() {
         rows4.push(posts[i])
     }
 
-    if (activeUser && posts && userData) {
+    // if (activeUser && posts && userData) {
         return (
             <div className="w-full py-8">
                 <Container>
@@ -104,21 +104,21 @@ function Home() {
                 </Container>
             </div>
         )
-    } else {
-        return (
-            <div className="w-full py-8 text-center">
-                <Container>
-                    <div className="flex flex-wrap">
-                        <div className="p-2 w-full">
-                            <h1 className="text-2xl font-bold">
-                                Login to read posts
-                            </h1>
-                        </div>
-                    </div>
-                </Container>
-            </div>
-        )
-    }
+    // } else {
+    //     return (
+    //         <div className="w-full py-8 text-center">
+    //             <Container>
+    //                 <div className="flex flex-wrap">
+    //                     <div className="p-2 w-full">
+    //                         <h1 className="text-2xl font-bold">
+    //                             Login to read posts
+    //                         </h1>
+    //                     </div>
+    //                 </div>
+    //             </Container>
+    //         </div>
+    //     )
+    // }
 }
 
 export default Home

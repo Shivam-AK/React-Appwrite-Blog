@@ -127,11 +127,7 @@ const router = createBrowserRouter(
           <EditPost />
         </Protected>
       } />
-      <Route path='/post/:slug' element={
-        <Protected authentication={true}>
-          <Post />
-        </Protected>
-      } />
+      <Route path='/post/:slug' element={<Post />} />
       <Route path='/my-account' element={
         <Protected authentication={true}>
           <MyAccount />
