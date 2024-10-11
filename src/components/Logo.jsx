@@ -1,4 +1,3 @@
-import React from 'react'
 import reactLogo from '../assets/react.svg'
 
 function Logo({logoWidth = 100}) {

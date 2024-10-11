@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import { useEffect, useState } from "react"
 import { Link, useNavigate, useParams } from "react-router-dom"
 import appwriteService from "../appwrite/service"
 import { Button, Container } from "../components"
@@ -38,7 +38,7 @@ export default function Post() {
     return post ? (
         <div className="py-8">
             <Container>
-                <div className="w-full flex justify-center mb-4 relative border rounded-xl p-2">
+                <div className="relative flex justify-center w-full p-2 mb-4 border rounded-xl">
                     <img
                         src={userData !== null ? appwriteService.getFilePreview(post?.featured_Image) : defaultImg}
                         alt={post.title}
@@ -47,7 +47,7 @@ export default function Post() {
                     {isAuthor && (
                         <div className="absolute right-6 top-6">
                             <Link to={`/edit-post/${post.$id}`}>
-                                <Button bgColor="bg-green-500" className="mr-3 px-10" textColor='text-black'>
+                                <Button bgColor="bg-green-500" className="px-10 mr-3" textColor='text-black'>
                                     Edit
                                 </Button>
                             </Link>
@@ -67,7 +67,7 @@ export default function Post() {
                         }
                         `}
                     </style>
-                    <Editor data={{ "blocks": JSON.parse(post?.content) }} readOnly={true} reamingCharacter={false} className="bg-teal-50 text-black font-normal" />
+                    <Editor data={{ "blocks": JSON.parse(post?.content) }} readOnly={true} reamingCharacter={false} className="font-normal text-black bg-teal-50" />
                     {/* {console.log(JSON.parse(post?.content))} */}
                 </div>
             </Container>

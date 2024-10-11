@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import appwriteService from '../appwrite/service'
-import { Container, PostCard } from '../components'
+import { Container, PostCard, LogoutBtn } from '../components'
 import authService from '../appwrite/auth'
 import { useSelector } from "react-redux"
 import { useNavigate } from 'react-router-dom'
@@ -13,10 +13,6 @@ function MyAccount() {
 
   const userData = useSelector((state) => state.auth.userData)
 
-  let rows1 = []
-  let rows2 = []
-  let rows3 = []
-  let rows4 = []
   useEffect(() => {
 
     authService.getCurrentUser().then(user => {
@@ -44,79 +40,27 @@ function MyAccount() {
   }, [])
   // console.log(isUserPost);
 
-  for (let j = 0; j < posts.length; j += 4) {
-    rows1.push(posts[j])
-  }
-
-  for (let k = 1; k < posts.length; k += 4) {
-    rows2.push(posts[k])
-  }
-
-  for (let l = 2; l < posts.length; l += 4) {
-    rows3.push(posts[l])
-  }
-
-  for (let m = 3; m < posts.length; m += 4) {
-    rows4.push(posts[m])
-  }
-
   return (
     <div>
-      <div className='h-40 flex items-center bg-black justify-center flex-col'>
-        <h1>Hi {userData?.name} </h1>
-        <button onClick={() => navigate('/my-account/change-password')} className='px-5 py-2 border-4 hover:rounded-3xl duration-200 rounded-none border-white'> Change Your Password </button>
+      <div className='flex flex-col items-center justify-center py-5 bg-black min-h-40'>
+        <h1 className='mb-3'>Hi {userData?.name} </h1>
+        <div className='flex gap-3 sm:gap-5'>
+          <button onClick={() => navigate('/my-account/change-password')} className='px-4 py-2 duration-200 border-2 border-white rounded-none hover:rounded-3xl'> Change Password </button>
+          {<LogoutBtn className='px-4 py-2 duration-200 border-2 border-white rounded-none hover:rounded-3xl' />}
+        </div>
       </div>
       <div>
         <Container>
-          <div className="flex flex-wrap justify-center">
-            {/* {posts.map((post) => {
+          <div style={{ columns: "4 280px", gap: "16px", }}>
+            {posts.map((post) => {
               if (post.user_Id == userData.$id) {
-
-                return <div key={post.$id} className='p-2 w-1/4'>
+                return <div key={post.$id} className='mb-4 overflow-hidden'>
                   <PostCard
                     borderColor={post.user_Id === userData.$id ? 'border-b-4 border-orange-400' : ''}
                     {...post} />
                 </div>
               }
-
-            })} */}
-            <div className='w-1/4'>
-              {rows1.map(post => (
-                <div key={post?.$id} className='p-2 '>
-                  <PostCard
-                    borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
-                    {...post}
-                  />
-                </div>
-              ))}
-            </div >
-            <div className='w-1/4'>
-              {rows2.map(post => (
-                <div key={post?.$id} className='p-2 '>
-                  <PostCard
-                    borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
-                    {...post} />
-                </div>
-              ))}
-            </div>
-            <div className='w-1/4'>
-              {rows3.map(post => (
-                <div key={post?.$id} className='p-2 '>
-                  <PostCard
-                    borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
-                    {...post} />
-                </div>
-              ))}
-            </div>
-            <div className='w-1/4'>
-              {rows4.map(post => (
-                <div key={post?.$id} className='p-2 '>
-                  <PostCard
-                    borderColor={post?.user_Id === userData?.$id ? 'border-b-4 border-orange-400' : ''}
-                    {...post} />
-                </div>
-              ))}
-            </div>
+            })}
             {
               isUserPost || (
                 <h2>No Post Found</h2>

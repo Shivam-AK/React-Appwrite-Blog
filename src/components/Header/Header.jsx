@@ -1,4 +1,3 @@
-import React from 'react'
 import { Container, LogoutBtn } from '../index'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -10,9 +9,9 @@ function Header() {
   const authStatus = useSelector((state) => state.auth)
   const navigate = useNavigate()
 
-  let userName = null;
-  if(authStatus.userData){
-    userName = authStatus.userData.name;
+  let userName = null
+  if (authStatus.userData) {
+    userName = authStatus.userData.name
     // console.log(authStatus, userName);
   }
 
@@ -43,7 +42,6 @@ function Header() {
       active: authStatus.status
     },
   ]
-  
 
   return (
     <header className='bg-white'>
@@ -54,18 +52,18 @@ function Header() {
               <Logo logoWidth={70} />
             </Link>
           </div>
-          <ul className='flex ml-auto text-black items-center' style={{fontSize: '20px'}}>
+          <ul className='flex items-center ml-auto text-black' style={{ fontSize: '20px' }}>
             {navItems.map((item) => item.active ? (
               <li key={item.name}>
-                <button onClick={() => navigate(item.slug)} className='inline-block px-5 py-2 duration-200 hover:bg-blue-300 hover:border-b-black border-4 rounded-tl-3xl rounded-tr-3xl border-white'> {item.name} </button>
+                <button onClick={() => navigate(item.slug)} className='inline-block px-3 py-2 duration-200 rounded-md hover:bg-blue-300'> {item.name} </button>
               </li>
             ) : null)}
             {
               authStatus.status && (
-                <li key='logout' className='group/item relative'>
-                  <button onClick={() => navigate('/my-account')} className='group-hover/item:bg-blue-300 inline-block px-5 py-2 duration-200 hover:bg-blue-300 rounded-tl-3xl rounded-tr-3xl border-white'>Hi, {userName}</button>
-                  <ul className='group/edit group/btn w-full hidden group-hover/item:block absolute '>
-                    <li><LogoutBtn /></li>
+                <li key='logout' className='relative group/item'>
+                  <button onClick={() => navigate('/my-account')} className='inline-block px-3 py-2 duration-200 rounded-md group-hover/item:bg-blue-300 hover:bg-blue-300'>Hi, {userName}</button>
+                  <ul className='absolute hidden w-full group/edit group/btn group-hover/item:block '>
+                    <li><LogoutBtn className='w-full py-2 duration-200 bg-white border-4 border-black hover:bg-blue-300' /></li>
                   </ul>
                 </li>
               )

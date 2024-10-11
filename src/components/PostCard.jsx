@@ -1,4 +1,3 @@
-import React from 'react'
 import appwriteService from '../appwrite/service'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
@@ -12,7 +11,7 @@ function PostCard({ $id, title, featured_Image = '', borderColor = '' }) {
         <Link to={`/post/${$id}`}>
             
             <div className={`w-full bg-gray-100 rounded-xl p-4 ${borderColor}`}>
-                <div className='w-full justify-center mb-4'>
+                <div className='justify-center w-full mb-4'>
                     <img src={userData !== null ? appwriteService.getFilePreview(featured_Image) : defaultImg} alt={title}
                         className='rounded-xl' />
                 </div>

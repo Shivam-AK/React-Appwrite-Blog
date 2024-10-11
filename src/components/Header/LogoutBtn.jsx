@@ -1,4 +1,3 @@
-import React from 'react'
 import { useDispatch } from 'react-redux'
 import authService from '../../appwrite/auth'
 import { logout } from '../../store/authSlice'
@@ -18,7 +17,7 @@ function LogoutBtn({...props}) {
     }
 
     return (
-        <button onClick={logoutHandler} {...props} className='inline-block w-full py-2 bg-white duration-200 hover:bg-blue-300 border-4 border-black'>Logout</button>
+        <button onClick={logoutHandler} {...props}>Logout</button>
     )
 }
 

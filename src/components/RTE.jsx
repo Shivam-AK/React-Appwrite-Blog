@@ -1,4 +1,4 @@
-import React, { useId } from "react"
+import { useId } from "react"
 // import { Editor } from "@tinymce/tinymce-react"
 import { Controller } from "react-hook-form"
 
@@ -9,7 +9,7 @@ export default function RTE({ name, control, label, defaultValue = ""}) {
 
     return (
         <div className="w-full">
-            {label && <label className="inline-block mb-1 pl-1" htmlFor={id}> {label} </label>}
+            {label && <label className="inline-block pl-1 mb-1" htmlFor={id}> {label} </label>}
             <Controller
                 name={name || "content"}
                 control={control}
