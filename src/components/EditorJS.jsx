@@ -136,7 +136,7 @@ const Editor = React.forwardRef(function Editor({ data, onChangeData, readOnly, 
     }, [])
     return (
         <>
-            <div id='editorjs' {...props} />
+            <div id='editorjs' {...props} style={{borderRadius: 0}} />
             {reamingCharacter && <span>Total Reaming Character Spaces : {reamingChar} out of {totalChar}</span>}
         </>
     )

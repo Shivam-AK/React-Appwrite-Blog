@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useContext, useEffect } from 'react'
+import { useCallback, useState, useRef, useContext, useEffect } from 'react'
 import { useForm } from 'react-hook-form'
 import { Button, Input, Select } from '../index'
 import authService from '../../appwrite/auth'
@@ -185,9 +185,9 @@ function PostForm({ post }) {
 
     return (
         <>
-            {error && <p className='text-red-600 bg-white max-w-fit m-auto py-1 px-3 rounded-lg'> {error} </p>}
-            {addNewPost ? <form onSubmit={handleSubmit(submit)} className='flex flex-wrap'>
-                <div className='w-2/3 px-2 text-left'>
+            {error && <p className='px-3 py-1 m-auto text-red-600 bg-white rounded-lg max-w-fit'> {error} </p>}
+            {addNewPost ? <form onSubmit={handleSubmit(submit)} className='flex flex-col md:flex-row'>
+                <div className='w-full px-2 text-left md:w-2/3'>
                     <Input
                         label="Title :"
                         placeholder="Title"
@@ -215,22 +215,22 @@ function PostForm({ post }) {
                     defaultValue={getValues('content')}
                     />} */}
 
-                    <div className="w-full relative">
-                        <label className="inline-block mb-1 pl-1 " htmlFor='editorjs'>Content :</label>
+                    <div className="relative w-full">
+                        <label className="inline-block pl-1 mb-1 " htmlFor='editorjs'>Content :</label>
                         <Editor
                             data={editorData || getValues('content')}
                             onChangeData={setEditorData}
                             readOnly={false}
                             reamingCharacter={true}
                             placeholder="Let's take a note!"
-                            className='bg-white text-black font-normal focus:border-black duration-200'
+                            className='font-normal text-black duration-200 bg-white border-2 border-white'
                             {...register("content", {
                                 required: true,
                             })} />
                         {/* {console.log(getValues('content'))} */}
                     </div>
                 </div>
-                <div className='w-1/3 px-2 text-left'>
+                <div className='w-full px-2 text-left md:w-1/3'>
                     <Input
                         label='Featured Image :'
                         type='file'
@@ -238,7 +238,7 @@ function PostForm({ post }) {
                         {...register("image", { required: !post })}
                         onChange={onImageChange}
                     />
-                    <p className='text-sm mb-4'>Image Size Less then : 48 kb <br /> Image Allowed : jpeg, jpg, png</p>
+                    <p className='mb-4 text-sm'>Image Size Less then : 48 kb <br /> Image Allowed : jpeg, jpg, png</p>
                     {post ? (
                         <div className="w-full mb-4">
                             <img

@@ -25,8 +25,8 @@ function ChangePassword() {
   }
 
   return (
-    <div className='flex items-center justify-center w-full my-10'>
-      <div className='w-full max-w-lg p-10 mx-auto bg-gray-100 rounded-xl border-black/10'>
+    <div className='flex items-center justify-center w-full p-3 my-10'>
+      <div className='w-full max-w-lg px-4 mx-auto bg-gray-100 py-7 sm:p-10 rounded-xl border-black/10'>
         <div className='flex justify-center mb-2'>
           <span className='inline-block w-full max-w-[100px]'>
             <Logo width='100%' />

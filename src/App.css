@@ -102,3 +102,7 @@ h6 {
 .codex-editor .codex-editor__redactor {
   padding-bottom: 200px !important;
 }
+
+#editorjs:has(.codex-editor__redactor [contenteditable]:focus) {
+  border-color: #000;
+}
